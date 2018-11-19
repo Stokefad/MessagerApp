@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D320F6921A3409A006F26D0 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D320F6721A3409A006F26D0 /* ContactCell.swift */; };
+		2D320F6A21A3409A006F26D0 /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D320F6821A3409A006F26D0 /* ContactCell.xib */; };
+		2D320F6D21A340DF006F26D0 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D320F6B21A340DF006F26D0 /* MessageCell.swift */; };
+		2D320F6E21A340DF006F26D0 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D320F6C21A340DF006F26D0 /* MessageCell.xib */; };
 		2D76489A21A205600014B899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D76489921A205600014B899 /* AppDelegate.swift */; };
 		2D76489C21A205600014B899 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D76489B21A205600014B899 /* ViewController.swift */; };
 		2D76489F21A205600014B899 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D76489D21A205600014B899 /* Main.storyboard */; };
@@ -34,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D320F6721A3409A006F26D0 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
+		2D320F6821A3409A006F26D0 /* ContactCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactCell.xib; sourceTree = "<group>"; };
+		2D320F6B21A340DF006F26D0 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		2D320F6C21A340DF006F26D0 /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		2D76489621A205600014B899 /* MessangerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessangerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D76489921A205600014B899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D76489B21A205600014B899 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +82,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D320F6121A34015006F26D0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2D320F6621A3405F006F26D0 /* ContactCell */,
+				2D320F6521A3405D006F26D0 /* MessageCell */,
+				2D76489D21A205600014B899 /* Main.storyboard */,
+				2D7648A021A205600014B899 /* Assets.xcassets */,
+				2D7648A221A205600014B899 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2D320F6221A34017006F26D0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2D320F6321A3401A006F26D0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2D76489B21A205600014B899 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2D320F6421A3401D006F26D0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2D320F6521A3405D006F26D0 /* MessageCell */ = {
+			isa = PBXGroup;
+			children = (
+				2D320F6B21A340DF006F26D0 /* MessageCell.swift */,
+				2D320F6C21A340DF006F26D0 /* MessageCell.xib */,
+			);
+			name = MessageCell;
+			path = ContactCell;
+			sourceTree = "<group>";
+		};
+		2D320F6621A3405F006F26D0 /* ContactCell */ = {
+			isa = PBXGroup;
+			children = (
+				2D320F6721A3409A006F26D0 /* ContactCell.swift */,
+				2D320F6821A3409A006F26D0 /* ContactCell.xib */,
+			);
+			name = ContactCell;
+			path = MessageCell;
+			sourceTree = "<group>";
+		};
 		2D76488D21A205600014B899 = {
 			isa = PBXGroup;
 			children = (
@@ -97,11 +159,11 @@
 		2D76489821A205600014B899 /* MessangerApp */ = {
 			isa = PBXGroup;
 			children = (
+				2D320F6421A3401D006F26D0 /* ViewModel */,
+				2D320F6321A3401A006F26D0 /* Controller */,
+				2D320F6221A34017006F26D0 /* Model */,
+				2D320F6121A34015006F26D0 /* View */,
 				2D76489921A205600014B899 /* AppDelegate.swift */,
-				2D76489B21A205600014B899 /* ViewController.swift */,
-				2D76489D21A205600014B899 /* Main.storyboard */,
-				2D7648A021A205600014B899 /* Assets.xcassets */,
-				2D7648A221A205600014B899 /* LaunchScreen.storyboard */,
 				2D7648A521A205600014B899 /* Info.plist */,
 			);
 			path = MessangerApp;
@@ -229,6 +291,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D320F6E21A340DF006F26D0 /* MessageCell.xib in Resources */,
+				2D320F6A21A3409A006F26D0 /* ContactCell.xib in Resources */,
 				2D7648A421A205600014B899 /* LaunchScreen.storyboard in Resources */,
 				2D7648A121A205600014B899 /* Assets.xcassets in Resources */,
 				2D76489F21A205600014B899 /* Main.storyboard in Resources */,
@@ -256,6 +320,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D320F6921A3409A006F26D0 /* ContactCell.swift in Sources */,
+				2D320F6D21A340DF006F26D0 /* MessageCell.swift in Sources */,
 				2D76489C21A205600014B899 /* ViewController.swift in Sources */,
 				2D76489A21A205600014B899 /* AppDelegate.swift in Sources */,
 			);
