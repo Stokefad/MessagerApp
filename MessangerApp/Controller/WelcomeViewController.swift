@@ -16,5 +16,13 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func loginButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "goToLogin", sender: self)
+    }
+    
+    
+    @IBAction func registrationButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "goToRegistration", sender: self)
+    }
 }
 
