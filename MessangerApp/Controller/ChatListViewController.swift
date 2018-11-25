@@ -48,11 +48,14 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
         
         let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
         let destinationVC = mainStoryBoard.instantiateViewController(withIdentifier: String(describing: MessageListViewController.self)) as! MessageListViewController
+        
+        contactsTableView.deselectRow(at: indexPath, animated: true)
+        
         destinationVC.currentContact = chatList[indexPath.row]
         destinationVC.currentUserLogin = self.currentUserLogin
 

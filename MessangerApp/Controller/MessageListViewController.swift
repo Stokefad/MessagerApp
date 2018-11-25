@@ -28,7 +28,7 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
         msgTableView.dataSource = self
         
         msgTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "msgCell")
-        
+
         getMessages()
         
         msgTableView.reloadData()
@@ -62,10 +62,30 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
     private func saveMessage(text : String, date : String) {
         let dbref = db.collection("users").document(currentUserLogin!).collection("contacts").document((currentContact?.PersonName!)!).collection("messages")
         
+        let dbrefGetter = db.collection("users").document((currentContact?.PersonName!)!).collection("contacts").document(currentUserLogin!).collection("messages")
+        
+        dbrefGetter.addDocument(data: [
+            "text" : text,
+            "date" : date
+        ])
+        
         dbref.addDocument(data: [
             "text" : text,
             "date" : date
         ])
+        
+        // in current contacts
+        
+        db.collection("users").document(currentUserLogin!).collection("contacts").document((currentContact?.PersonName!)!).setData([
+            "login" : currentContact?.PersonName! as Any,
+            "email" : currentContact?.email! as Any,
+            ])
+        
+        // reverse
+        
+        db.collection("users").document((currentContact?.PersonName!)!).collection("contacts").document(currentUserLogin!).setData([
+            "login" : currentUserLogin! as Any,
+            ])
     }
     
     private func getMessages() {

@@ -52,7 +52,7 @@ class RegistrationViewController : UIViewController {
     @IBAction func registerButtonPressed(_ sender: UIButton) {
         Auth.auth().createUser(withEmail: emailTextfield.text!, password: passwordTextfield.text!) { (authRes, error) in
             if authRes != nil {
-                self.createUserDB(login: self.fullNameTextfield.text!, email: self.emailTextfield.text!, messages: self.messages, contacts: self.contacts)
+                self.createUserDB(login: self.fullNameTextfield.text!, email: self.emailTextfield.text!)
                 self.performSegue(withIdentifier: "goToChatList", sender: self)
             }
             else {
@@ -64,35 +64,13 @@ class RegistrationViewController : UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! ChatListViewController
         
-        let user = createUserSystem(login: self.fullNameTextfield.text!, email: self.emailTextfield.text!, messages: self.messages, contacts: self.contacts)
-        
-        destVC.currentUserLogin = user.PersonName
+        destVC.currentUserLogin = fullNameTextfield.text!
     }
     
-    private func createUserSystem(login : String, email : String, messages : [Message], contacts : [ContactPerson]) -> ContactPerson {
-        user.contacts = contacts
-        user.email = email
-        user.PersonName = login
-        user.message = messages
-        
-        return user
-    }
-    
-    private func createUserDB(login : String, email : String, messages : [Message], contacts : [ContactPerson]) {
+    private func createUserDB(login : String, email : String) {
         db.collection("users").document(login).setData([
             "login" : login,
             "email" : email,
-        ])
-        
-        let sameReference = db.collection("users").document(login).collection("contacts").document(contacts[contacts.count - 1].PersonName!)
-        
-        sameReference.setData([
-            "email" : contacts[contacts.count - 1].email!,
-            "login" : contacts[contacts.count - 1].PersonName!
-        ])
-        sameReference.collection("messages").document().setData([
-            "text" : "AHDFLKHSDK kjefskjf flknsdfnsd",
-            "date" : "\(Date.init())"
         ])
     }
 }

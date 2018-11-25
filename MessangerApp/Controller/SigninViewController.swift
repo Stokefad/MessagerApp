@@ -41,21 +41,4 @@ class SigninViewController : UIViewController {
         
         destVC.currentUserLogin = loginTextfield.text!
     }
-    
-    
-    
-    private func getUser(login : String) -> ContactPerson? {
-        let docRef = db.collection("users").document("Puppy")
-
-        let cp : ContactPerson = ContactPerson()
-        print("YA TUT")
-        docRef.getDocument { (snapshot, error) in
-            let data = snapshot!.data()!
-            
-            cp.email = (data["email"] as! String)
-            print((data["email"] as! String))
-            cp.PersonName = (data["login"] as! String)
-        }
-        return cp
-    }
 }
