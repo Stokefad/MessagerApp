@@ -19,6 +19,7 @@ class RegistrationViewController : UIViewController {
     let db = Firestore.firestore()
     
 
+    @IBOutlet var registerButton: UIButton!
     
     let user : ContactPerson = ContactPerson()
     var messages : [Message] = [Message]()
@@ -34,6 +35,7 @@ class RegistrationViewController : UIViewController {
         settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
         
+        registerButton.layer.cornerRadius = 12
         
         let msg : Message = Message() // msg for tests
         msg.messageDate = "fdsfds"

@@ -16,7 +16,8 @@ class SigninViewController : UIViewController {
     
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-    @IBOutlet var loginTextfield: UITextField!
+    
+    @IBOutlet var signinButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,20 +26,38 @@ class SigninViewController : UIViewController {
         settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
         
+        signinButton.layer.cornerRadius = 12
+        
     }
     
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
-        Auth.auth().signIn(withEmail: emailTextfield.text ?? "", password: passwordTextfield.text ?? "") { (authRes, error) in
-            if authRes != nil {
-                self.performSegue(withIdentifier: "goToChatList", sender: self)
-            }
-        }
+        signIn(login: emailTextfield.text!)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! ChatListViewController
         
-        destVC.currentUserLogin = loginTextfield.text!
+        destVC.currentUserLogin = emailTextfield.text!
+    }
+    
+    private func signIn(login : String) {
+        let dbref = db.collection("users").document(login)
+        
+        dbref.getDocument { (snapshot, error) in
+            if let data = snapshot?.data() {
+                let email = data["email"] as? String
+                print(email!)
+                Auth.auth().signIn(withEmail: email!, password: self.passwordTextfield.text!, completion: { (result, error) in
+                    if result != nil {
+                        self.performSegue(withIdentifier: "goToChatList", sender: self)
+                    }
+                    else {
+                        print("This is email: \(email!)")
+                        print("Problem with logging in occured")
+                    }
+                })
+            }
+        }
     }
 }

@@ -13,9 +13,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        signinButton.layer.cornerRadius = 12
+        registerButton.layer.cornerRadius = 12
+        
     }
 
-
+    @IBOutlet var signinButton: UIButton!
+    @IBOutlet var registerButton: UIButton!
+    
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "goToLogin", sender: self)
     }
@@ -25,4 +31,5 @@ class ViewController: UIViewController {
         performSegue(withIdentifier: "goToRegistration", sender: self)
     }
 }
+
 

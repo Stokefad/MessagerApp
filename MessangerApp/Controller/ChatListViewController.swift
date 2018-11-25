@@ -16,6 +16,8 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
     var currentUserLogin : String?
     let db = Firestore.firestore()
     
+    @IBOutlet var addContactButton: UIButton!
+    @IBOutlet var goToProfileButton: UIButton!
     
     var userName : String?
     
@@ -27,6 +29,9 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         
         contactsTableView.delegate = self
         contactsTableView.dataSource = self
+        
+        addContactButton.layer.cornerRadius = addContactButton.bounds.width / 2.5
+        goToProfileButton.layer.cornerRadius = goToProfileButton.bounds.width / 2.5
         
         getContacts()
         

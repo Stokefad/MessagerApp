@@ -18,12 +18,14 @@ class AddNewContactViewController : UIViewController {
     @IBOutlet weak var usernameTextfield: UITextField!
     @IBOutlet weak var addUserButtonPressed: UIButton!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet var addButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print(currentAccount!)
         label.text = ""
-    
+        
+        addButton.layer.cornerRadius = 21
     }
     
     @IBAction func addUserButtonPressed(_ sender: UIButton) {
