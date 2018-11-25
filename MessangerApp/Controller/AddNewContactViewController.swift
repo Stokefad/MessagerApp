@@ -61,7 +61,7 @@ class AddNewContactViewController : UIViewController {
     }
     
     private func updateUserDB(login : String, email : String, curUser : String) {
-        db.collection("users").document(curUser).collection("contacts").document().setData([
+        db.collection("users").document(curUser).collection("contacts").document(login).setData([
             "email" : email,
             "login" : login
             ])

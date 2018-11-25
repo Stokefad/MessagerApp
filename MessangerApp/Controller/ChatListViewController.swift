@@ -44,14 +44,22 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         let cell = contactsTableView.dequeueReusableCell(withIdentifier: "contactCell") as! ContactCell
         
         cell.configureContactCell(with: chatList[indexPath.row])
-        
-        print(" i am here")
-        
+    
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let destinationVC = mainStoryBoard.instantiateViewController(withIdentifier: String(describing: MessageListViewController.self)) as! MessageListViewController
+        destinationVC.currentContact = chatList[indexPath.row]
+        destinationVC.currentUserLogin = self.currentUserLogin
+
+        self.navigationController?.pushViewController(destinationVC, animated: true)
+    }
+    
     private func configureTableView() {
-        contactsTableView.rowHeight = UITableView.automaticDimension
         contactsTableView.estimatedRowHeight = 180.0
     }
     
@@ -84,8 +92,8 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
 
                     let msg : Message = Message()
                     
-                    msg.messageDate = "fdsfdsf"
-                    msg.messageText = "fdsfdsfds243532df dfuhfgh ksdfjnds ag"
+                    msg.messageDate = " "
+                    msg.messageText = ""
                     
                     testmsgArr.append(msg)
                     

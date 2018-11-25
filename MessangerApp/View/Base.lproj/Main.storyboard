@@ -401,7 +401,7 @@
                     <connections>
                         <outlet property="contactsTableView" destination="tS8-Cd-w1r" id="1XK-6b-2aU"/>
                         <segue destination="Yuw-sn-U7L" kind="show" id="Fey-Yn-WJh"/>
-                        <segue destination="WAs-iC-y2m" kind="show" id="qfJ-lC-FA4"/>
+                        <segue destination="WAs-iC-y2m" kind="show" identifier="goToMessageList" id="qfJ-lC-FA4"/>
                         <segue destination="1bQ-8z-sb1" kind="show" identifier="goToNewContact" id="xGN-Yb-TsE"/>
                     </connections>
                 </viewController>
@@ -424,10 +424,10 @@
             </objects>
             <point key="canvasLocation" x="4356" y="-976"/>
         </scene>
-        <!--View Controller-->
+        <!--Message List View Controller-->
         <scene sceneID="6xp-0j-qL0">
             <objects>
-                <viewController id="WAs-iC-y2m" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MessageListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WAs-iC-y2m" customClass="MessageListViewController" customModule="MessangerApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I1M-Lg-cVf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -452,6 +452,9 @@
                                             <constraint firstAttribute="height" constant="46" id="Nk4-MV-OBh"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="sendButtonPressed:" destination="WAs-iC-y2m" eventType="touchUpInside" id="eE3-K1-AE4"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOf-LX-UF0">
                                         <rect key="frame" x="22" y="16" width="46" height="46"/>
@@ -491,6 +494,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Opr-E6-jub"/>
                     </view>
+                    <connections>
+                        <outlet property="msgTableView" destination="4VZ-AH-gPp" id="Ziz-8Y-BX2"/>
+                        <outlet property="msgTextfield" destination="ndU-Zd-flC" id="ryz-0c-D7G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Uf-iO-Scb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

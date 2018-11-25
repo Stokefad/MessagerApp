@@ -9,7 +9,11 @@
 import UIKit
 
 class MessageCell: UITableViewCell {
-
+    
+    
+    @IBOutlet var msgText: UILabel!
+    @IBOutlet var date: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,6 +23,11 @@ class MessageCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    public func configureCell(with message : Message) {
+        msgText.text = message.messageText
+        date.text = message.messageDate
     }
     
 }

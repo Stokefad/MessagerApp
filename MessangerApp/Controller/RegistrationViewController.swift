@@ -83,11 +83,14 @@ class RegistrationViewController : UIViewController {
             "login" : login,
             "email" : email,
         ])
-        db.collection("users").document(login).collection("contacts").document().setData([
+        
+        let sameReference = db.collection("users").document(login).collection("contacts").document(contacts[contacts.count - 1].PersonName!)
+        
+        sameReference.setData([
             "email" : contacts[contacts.count - 1].email!,
             "login" : contacts[contacts.count - 1].PersonName!
         ])
-        db.collection("users").document(login).collection("messages").document().setData([
+        sameReference.collection("messages").document().setData([
             "text" : "AHDFLKHSDK kjefskjf flknsdfnsd",
             "date" : "\(Date.init())"
         ])
