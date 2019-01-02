@@ -27,6 +27,12 @@ class MessageCell: UITableViewCell {
     
     public func configureCell(with message : Message) {
         msgText.text = message.messageText
+        
+        let dateF = DateFormatter()
+        
+        dateF.dateStyle = .medium
+        dateF.timeStyle = .short
+        
         date.text = message.messageDate
     }
     

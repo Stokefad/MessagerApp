@@ -16,13 +16,15 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
     var currentUserLogin : String?
     let db = Firestore.firestore()
     
+    var messageArray : [[Message]] = [[Message]]()
+    
     @IBOutlet var addContactButton: UIButton!
     @IBOutlet var goToProfileButton: UIButton!
     
     var userName : String?
     
-    
     @IBOutlet weak var contactsTableView: UITableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +35,10 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         addContactButton.layer.cornerRadius = addContactButton.bounds.width / 2.5
         goToProfileButton.layer.cornerRadius = goToProfileButton.bounds.width / 2.5
         
-        getContacts()
-        
         contactsTableView.reloadData()
         configureTableView()
+        
+        getLastMessages()
         
         contactsTableView.register(UINib(nibName: "ContactCell", bundle: nil), forCellReuseIdentifier: "contactCell")
     }
@@ -49,7 +51,7 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         let cell = contactsTableView.dequeueReusableCell(withIdentifier: "contactCell") as! ContactCell
         
         cell.configureContactCell(with: chatList[indexPath.row])
-    
+      
         return cell
     }
     
@@ -64,7 +66,7 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         destinationVC.currentContact = chatList[indexPath.row]
         destinationVC.currentUserLogin = self.currentUserLogin
 
-        self.navigationController?.pushViewController(destinationVC, animated: true)
+        self.navigationController?.pushViewController(destinationVC, animated: true)  
     }
     
     private func configureTableView() {
@@ -75,6 +77,12 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         performSegue(withIdentifier: "goToNewContact", sender: self)
     }
     
+    
+    
+    @IBAction func profileButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "goToProfile", sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToNewContact" {
             let destVC = segue.destination as! AddNewContactViewController
@@ -83,43 +91,60 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    private func getContacts() {
+    private func getLastMessages() {
+        let dbref = db.collection("users").document((currentUserLogin!)).collection("contacts")
         
-        let dbref2 = db.collection("users").document((currentUserLogin!)).collection("contacts")
         
-        
-        print(currentUserLogin!)
-        var tempArr : [ContactPerson] = [ContactPerson]()
-        
-        dbref2.getDocuments { (snapshot, error) in
+        var tempArr = [ContactPerson]()
+    
+        dbref.addSnapshotListener { (snapshot, error) in
             if let collection = snapshot?.documents {
-                for item in collection {
-                    let cp : ContactPerson = ContactPerson()
                 
-                    var testmsgArr : [Message] = [Message]()
-
-                    let msg : Message = Message()
+                for item in collection {
+                    let dbmesref = dbref.document((item["login"] as? String)!).collection("messages")
                     
-                    msg.messageDate = " "
-                    msg.messageText = ""
-                    
-                    testmsgArr.append(msg)
-                    
-                    cp.email = (item["email"]! as! String)
-                    cp.PersonName = (item["login"]! as! String)
-                    cp.message = testmsgArr
-                    
-                    tempArr.append(cp)
+                    dbmesref.addSnapshotListener({ (snapshot, error) in
+                        if let collection = snapshot?.documents {
+                            
+                            let cp = ContactPerson()
+                            var msgArr : [Message] = [Message]()
+                            let msg : Message = Message()
+                            
+                            cp.email = (item["email"]! as! String)
+                            cp.PersonName = (item["login"]! as! String)
+                            
+                            for item in collection {
+                                
+                                msg.messageDate = item["date"] as? String
+                                msg.messageText = item["text"] as? String
+                                msgArr.append(msg)
+                                msgArr = msgArr.sorted(by: { $0.messageDate!.compare($1.messageDate!) == .orderedAscending })
+                            }
+                            cp.message = msgArr
+                       
+                            if tempArr.count > 0 {
+                                for i in 0 ... tempArr.count - 1 {
+                                    if tempArr[i].PersonName! == cp.PersonName! {
+                                        tempArr[i] = cp
+                                    }
+                                    else {
+                                        if i == tempArr.count - 1 {
+                                            tempArr.append(cp)
+                                        }
+                                    }
+                                }
+                            }
+                            else {
+                                tempArr.append(cp)
+                            }
+                            
+                            self.chatList = tempArr
+                            self.contactsTableView.reloadData()
+                        }
+                    })
                 }
             }
-            
-            print(tempArr)
-            
-            self.chatList = tempArr
-            
-            self.contactsTableView.reloadData()
         }
     }
-    
 }
 

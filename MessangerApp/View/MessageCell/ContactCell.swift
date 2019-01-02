@@ -32,8 +32,14 @@ class ContactCell: UITableViewCell {
     
     public func configureContactCell(with contact : ContactPerson) {
         nameLabel.text = contact.PersonName
-        lastMessageLabel.text = contact.message[contact.message.count - 1].messageText
-        dateLabel.text = "Сообщение отправлено: \(String(describing: contact.message[contact.message.count - 1].messageDate))"
+        if contact.message.count > 0 {
+            lastMessageLabel.text = contact.message[contact.message.count - 1].messageText
+            dateLabel.text = "Сообщение отправлено: \(String(describing: contact.message[contact.message.count - 1].messageDate))"
+        }
+        else {
+            lastMessageLabel.text = "Start chatting now"
+            dateLabel.text = "jj"
+        }
   //      contactImage.image = contact.image
     }
     

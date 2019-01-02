@@ -34,6 +34,15 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
         msgTableView.reloadData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if messagesArray.count > 0 {
+            msgTableView.scrollToRow(at: IndexPath(row: messagesArray.count - 1, section: 0), at: .bottom, animated: false)
+        }
+        
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messagesArray.count
     }
@@ -52,7 +61,7 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
         newMsg.messageDate = "\(Date.init())"
         newMsg.messageText = msgTextfield.text!
         
-        saveMessage(text: newMsg.messageText!, date: newMsg.messageDate!)
+        saveMessage(text: newMsg.messageText!, date: "\(newMsg.messageDate!)")
         
         messagesArray.append(newMsg)
         
@@ -71,7 +80,7 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
         
         dbref.addDocument(data: [
             "text" : text,
-            "date" : date
+            "date" : date,
         ])
         
         // in current contacts
@@ -79,28 +88,37 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
         db.collection("users").document(currentUserLogin!).collection("contacts").document((currentContact?.PersonName!)!).setData([
             "login" : currentContact?.PersonName! as Any,
             "email" : currentContact?.email! as Any,
-            ])
+        ])
         
         // reverse
         
         db.collection("users").document((currentContact?.PersonName!)!).collection("contacts").document(currentUserLogin!).setData([
             "login" : currentUserLogin! as Any,
-            ])
+            "email" : Auth.auth().currentUser?.email! as Any
+        ])
     }
     
     private func getMessages() {
         let dbref = db.collection("users").document(currentUserLogin!).collection("contacts").document((currentContact?.PersonName!)!).collection("messages")
         
-        dbref.getDocuments { (snapshot, error) in
+        dbref.addSnapshotListener { (snapshot, error) in
             if let collection = snapshot?.documents {
+                
+                var tempArr : [Message] = [Message]()
+                
                 for item in collection {
                     let msg : Message = Message()
                     
                     msg.messageDate = item["date"] as? String
                     msg.messageText = item["text"] as? String
                     
-                    self.messagesArray.append(msg)
+                    tempArr.append(msg)
                 }
+                
+                let resArr = tempArr.sorted(by: { $0.messageDate!.compare($1.messageDate!) == .orderedAscending })
+                
+                self.messagesArray = resArr
+                self.msgTableView.reloadData()
             }
         }
     }

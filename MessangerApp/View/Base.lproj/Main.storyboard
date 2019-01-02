@@ -392,6 +392,9 @@
                                         <state key="normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="profileButtonPressed:" destination="mjA-N2-HDe" eventType="touchUpInside" id="PSA-pR-CLr"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -424,7 +427,7 @@
                         <outlet property="addContactButton" destination="MZT-Dm-38h" id="0OO-7b-o61"/>
                         <outlet property="contactsTableView" destination="tS8-Cd-w1r" id="1XK-6b-2aU"/>
                         <outlet property="goToProfileButton" destination="Xuf-D4-sgR" id="ajX-mp-L0b"/>
-                        <segue destination="Yuw-sn-U7L" kind="show" id="Fey-Yn-WJh"/>
+                        <segue destination="Yuw-sn-U7L" kind="show" identifier="goToProfile" id="Fey-Yn-WJh"/>
                         <segue destination="WAs-iC-y2m" kind="show" identifier="goToMessageList" id="qfJ-lC-FA4"/>
                         <segue destination="1bQ-8z-sb1" kind="show" identifier="goToNewContact" id="xGN-Yb-TsE"/>
                     </connections>
@@ -433,20 +436,70 @@
             </objects>
             <point key="canvasLocation" x="4509.6000000000004" y="145.27736131934034"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="Qfv-OW-K9J">
             <objects>
-                <viewController id="Yuw-sn-U7L" sceneMemberID="viewController">
+                <viewController id="Yuw-sn-U7L" customClass="ProfileViewController" customModule="MessangerApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Dk-kT-sFv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bugatti" translatesAutoresizingMaskIntoConstraints="NO" id="T35-Yf-VcU">
+                                <rect key="frame" x="0.0" y="20" width="414" height="353"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="353" id="Yzv-Un-dYd"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Igor Naumenko" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="98G-Di-7eC">
+                                <rect key="frame" x="29" y="298" width="164" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBr-hb-f8u">
+                                <rect key="frame" x="293" y="298" width="62" height="62"/>
+                                <color key="backgroundColor" red="0.70269256830000004" green="0.0054134340030000004" blue="0.99744123220000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="Ulb-bv-s4p"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="62" id="gXV-tw-XP5"/>
+                                </constraints>
+                                <state key="normal" title="Add"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I dont fucking close my eyes when i sneeze" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOE-NK-mkx">
+                                <rect key="frame" x="20" y="428" width="330" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="98G-Di-7eC" firstAttribute="leading" secondItem="vP1-EK-sOx" secondAttribute="leading" constant="29" id="Ar4-he-q9y"/>
+                            <constraint firstItem="vP1-EK-sOx" firstAttribute="trailing" secondItem="IBr-hb-f8u" secondAttribute="trailing" constant="59" id="DGb-a2-CBn"/>
+                            <constraint firstItem="SOE-NK-mkx" firstAttribute="top" secondItem="98G-Di-7eC" secondAttribute="bottom" constant="100" id="J5P-db-wT2"/>
+                            <constraint firstItem="T35-Yf-VcU" firstAttribute="leading" secondItem="vP1-EK-sOx" secondAttribute="leading" id="NNx-jh-I2N"/>
+                            <constraint firstItem="vP1-EK-sOx" firstAttribute="trailing" secondItem="SOE-NK-mkx" secondAttribute="trailing" constant="64" id="QWL-bR-MJZ"/>
+                            <constraint firstItem="SOE-NK-mkx" firstAttribute="top" secondItem="T35-Yf-VcU" secondAttribute="bottom" constant="55" id="SGs-PU-xht"/>
+                            <constraint firstItem="SOE-NK-mkx" firstAttribute="leading" secondItem="8Dk-kT-sFv" secondAttribute="leadingMargin" id="WKb-Lx-SvH"/>
+                            <constraint firstItem="SOE-NK-mkx" firstAttribute="leading" secondItem="vP1-EK-sOx" secondAttribute="leading" constant="20" id="coS-a2-8vc"/>
+                            <constraint firstItem="T35-Yf-VcU" firstAttribute="top" secondItem="vP1-EK-sOx" secondAttribute="top" id="eMc-oG-7L0"/>
+                            <constraint firstItem="98G-Di-7eC" firstAttribute="top" secondItem="vP1-EK-sOx" secondAttribute="top" constant="278" id="j5W-rt-618"/>
+                            <constraint firstItem="vP1-EK-sOx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SOE-NK-mkx" secondAttribute="trailing" symbolic="YES" id="odf-a1-VK3"/>
+                            <constraint firstItem="vP1-EK-sOx" firstAttribute="bottom" secondItem="SOE-NK-mkx" secondAttribute="bottom" constant="287" id="odz-3l-FZO"/>
+                            <constraint firstItem="T35-Yf-VcU" firstAttribute="trailing" secondItem="vP1-EK-sOx" secondAttribute="trailing" id="ppz-jn-e6M"/>
+                            <constraint firstItem="IBr-hb-f8u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="98G-Di-7eC" secondAttribute="trailing" constant="8" symbolic="YES" id="rI3-Ci-kdL"/>
+                            <constraint firstItem="IBr-hb-f8u" firstAttribute="top" secondItem="98G-Di-7eC" secondAttribute="top" id="v1X-MV-XXH"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="vP1-EK-sOx"/>
                     </view>
+                    <connections>
+                        <outlet property="mainImage" destination="T35-Yf-VcU" id="1a3-no-zsl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tTh-nR-Slg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4356" y="-976"/>
+            <point key="canvasLocation" x="4355.072463768116" y="-976.63043478260875"/>
         </scene>
         <!--Message List View Controller-->
         <scene sceneID="6xp-0j-qL0">
@@ -671,6 +724,9 @@
             <point key="canvasLocation" x="900" y="172.26386806596702"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bugatti" width="400" height="266.66665649414062"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wlS-MW-7Zh"/>
     </inferredMetricsTieBreakers>

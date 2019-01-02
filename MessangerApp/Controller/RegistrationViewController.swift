@@ -36,18 +36,6 @@ class RegistrationViewController : UIViewController {
         db.settings = settings
         
         registerButton.layer.cornerRadius = 12
-        
-        let msg : Message = Message() // msg for tests
-        msg.messageDate = "fdsfds"
-        msg.messageText = "QQ WORLD"
-        messages.append(msg)
-        
-        contact.contacts = contacts
-        contact.email = "dsf fjfdsd"
-        contact.message = [msg]
-        contact.PersonName = "ZDAROVA"
-        
-        contacts.append(contact)
 
     }
     

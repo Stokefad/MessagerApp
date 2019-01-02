@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D276A6921DD391C00B47CBE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D276A6821DD391C00B47CBE /* ProfileViewController.swift */; };
 		2D320F6921A3409A006F26D0 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D320F6721A3409A006F26D0 /* ContactCell.swift */; };
 		2D320F6A21A3409A006F26D0 /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D320F6821A3409A006F26D0 /* ContactCell.xib */; };
 		2D320F6D21A340DF006F26D0 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D320F6B21A340DF006F26D0 /* MessageCell.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D276A6821DD391C00B47CBE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		2D320F6721A3409A006F26D0 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		2D320F6821A3409A006F26D0 /* ContactCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactCell.xib; sourceTree = "<group>"; };
 		2D320F6B21A340DF006F26D0 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				2D51457421A59FEA00DA9FD1 /* ChatListViewController.swift */,
 				2D81179221A84948007F3778 /* AddNewContactViewController.swift */,
 				2D81179421A893FB007F3778 /* MessageListViewController.swift */,
+				2D276A6821DD391C00B47CBE /* ProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				2D320F6D21A340DF006F26D0 /* MessageCell.swift in Sources */,
 				2D51457921A5A0E300DA9FD1 /* Message.swift in Sources */,
 				2D81179321A84948007F3778 /* AddNewContactViewController.swift in Sources */,
+				2D276A6921DD391C00B47CBE /* ProfileViewController.swift in Sources */,
 				2D320F7421A34E94006F26D0 /* SigninViewController.swift in Sources */,
 				2D76489C21A205600014B899 /* WelcomeViewController.swift in Sources */,
 				2D51457521A59FEA00DA9FD1 /* ChatListViewController.swift in Sources */,
