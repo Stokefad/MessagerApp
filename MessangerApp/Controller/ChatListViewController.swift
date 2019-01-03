@@ -86,8 +86,14 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToNewContact" {
             let destVC = segue.destination as! AddNewContactViewController
-            print(self.currentUserLogin!)
+            
             destVC.currentAccount = self.currentUserLogin!
+        }
+        
+        if segue.identifier == "goToProfile" {
+            let destVC = segue.destination as! ProfileViewController
+            
+            destVC.user = self.currentUserLogin!
         }
     }
     

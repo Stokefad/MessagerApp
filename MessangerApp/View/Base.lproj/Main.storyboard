@@ -465,6 +465,9 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="62" id="gXV-tw-XP5"/>
                                 </constraints>
                                 <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="setPicturePressed:" destination="Yuw-sn-U7L" eventType="touchUpInside" id="tao-4q-dqG"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I dont fucking close my eyes when i sneeze" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOE-NK-mkx">
                                 <rect key="frame" x="20" y="428" width="330" height="21"/>
