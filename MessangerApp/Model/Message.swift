@@ -12,5 +12,6 @@ class Message {
     
     var messageText : String?
     var messageDate : String?
+    var sender : String?
     
 }

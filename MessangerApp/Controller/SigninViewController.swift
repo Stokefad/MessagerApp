@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import Firebase
 
-class SigninViewController : UIViewController {
+class SigninViewController : UIViewController, UITextFieldDelegate {
     
     let db = Firestore.firestore()
     
@@ -19,8 +19,15 @@ class SigninViewController : UIViewController {
     
     @IBOutlet var signinButton: UIButton!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let gestRec = UITapGestureRecognizer(target: self, action: #selector(endEditing))
+        self.view.addGestureRecognizer(gestRec)
+        
+        emailTextfield.delegate = self
+        passwordTextfield.delegate = self
         
         let settings = db.settings
         settings.areTimestampsInSnapshotsEnabled = true
@@ -28,6 +35,12 @@ class SigninViewController : UIViewController {
         
         signinButton.layer.cornerRadius = 12
         
+    }
+    
+    
+    @objc private func endEditing() {
+        emailTextfield.endEditing(true)
+        passwordTextfield.endEditing(true)
     }
     
     

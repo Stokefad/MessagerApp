@@ -15,8 +15,10 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
     var chatList : [ContactPerson] = [ContactPerson]()
     var currentUserLogin : String?
     let db = Firestore.firestore()
+    let storRef = Storage.storage()
     
     var messageArray : [[Message]] = [[Message]]()
+    var imageArray : [UIImage] = [UIImage]()
     
     @IBOutlet var addContactButton: UIButton!
     @IBOutlet var goToProfileButton: UIButton!
@@ -51,6 +53,10 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         let cell = contactsTableView.dequeueReusableCell(withIdentifier: "contactCell") as! ContactCell
         
         cell.configureContactCell(with: chatList[indexPath.row])
+        
+        if imageArray.count > indexPath.row {
+            cell.contactImage.image = imageArray[indexPath.row]
+        }
       
         return cell
     }
@@ -62,6 +68,10 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         let destinationVC = mainStoryBoard.instantiateViewController(withIdentifier: String(describing: MessageListViewController.self)) as! MessageListViewController
         
         contactsTableView.deselectRow(at: indexPath, animated: true)
+        
+        if imageArray.count > indexPath.row {
+            destinationVC.currentImage = imageArray[indexPath.row]
+        }
         
         destinationVC.currentContact = chatList[indexPath.row]
         destinationVC.currentUserLogin = self.currentUserLogin
@@ -119,6 +129,8 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
                             cp.email = (item["email"]! as! String)
                             cp.PersonName = (item["login"]! as! String)
                             
+                            self.getContactImage(name: cp.PersonName!)
+                            
                             for item in collection {
                                 
                                 msg.messageDate = item["date"] as? String
@@ -149,6 +161,21 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
                         }
                     })
                 }
+            }
+        }
+    }
+    
+    private func getContactImage(name : String) {
+        let ref = storRef.reference().child("images").child(name)
+        
+        ref.getData(maxSize: 1 * 1024 * 1024 * 1024) { (data, error) in
+            if error != nil {
+                print("Error occured")
+            }
+            else {
+                print(" i am here ")
+                self.imageArray.append(UIImage(data: data!)!)
+                self.contactsTableView.reloadData()
             }
         }
     }

@@ -13,6 +13,8 @@ class MessageCell: UITableViewCell {
     
     @IBOutlet var msgText: UILabel!
     @IBOutlet var date: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +29,7 @@ class MessageCell: UITableViewCell {
     
     public func configureCell(with message : Message) {
         msgText.text = message.messageText
+        nameLabel.text = message.sender
         
         let dateF = DateFormatter()
         

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,32 +36,48 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="okj-AE-hzy">
+                        <rect key="frame" x="7" y="6" width="55" height="52"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="Ai5-Zg-12Y"/>
+                            <constraint firstAttribute="height" constant="52" id="RyC-zV-Nzs"/>
+                            <constraint firstAttribute="width" constant="55" id="crN-Mh-gdX"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.23625251650000001" green="0.53564715389999995" blue="0.96867102380000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 <constraints>
+                    <constraint firstItem="okj-AE-hzy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="0Bd-IG-oWl"/>
                     <constraint firstItem="87I-BX-Ncx" firstAttribute="top" secondItem="Zax-d4-L6h" secondAttribute="bottom" constant="2" id="2GZ-1x-Pd3"/>
                     <constraint firstAttribute="trailing" secondItem="87I-BX-Ncx" secondAttribute="trailing" constant="10" id="4C6-qx-lar"/>
                     <constraint firstItem="29w-UA-vzn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="59" id="6qB-j8-06U"/>
                     <constraint firstItem="29w-UA-vzn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="59" id="9SC-EA-h0O"/>
+                    <constraint firstItem="Zax-d4-L6h" firstAttribute="leading" secondItem="okj-AE-hzy" secondAttribute="trailing" constant="13" id="AYf-KD-3dq"/>
                     <constraint firstAttribute="trailingMargin" secondItem="29w-UA-vzn" secondAttribute="trailing" constant="122" id="Ewl-QI-kTv"/>
                     <constraint firstItem="29w-UA-vzn" firstAttribute="top" secondItem="87I-BX-Ncx" secondAttribute="bottom" constant="1" id="G3R-UJ-Qxo"/>
                     <constraint firstItem="29w-UA-vzn" firstAttribute="top" secondItem="87I-BX-Ncx" secondAttribute="bottom" constant="1" id="Kn7-d9-BF7"/>
+                    <constraint firstItem="okj-AE-hzy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="7" id="Lpz-ER-BVz"/>
                     <constraint firstItem="Zax-d4-L6h" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="ObR-De-67G"/>
+                    <constraint firstItem="okj-AE-hzy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="7" id="REi-Sc-Lgg"/>
                     <constraint firstItem="87I-BX-Ncx" firstAttribute="top" secondItem="Zax-d4-L6h" secondAttribute="bottom" constant="2" id="RTG-wl-VIW"/>
                     <constraint firstItem="29w-UA-vzn" firstAttribute="top" secondItem="87I-BX-Ncx" secondAttribute="bottom" constant="1" id="RhX-CA-6R6"/>
                     <constraint firstItem="87I-BX-Ncx" firstAttribute="top" secondItem="Zax-d4-L6h" secondAttribute="bottom" constant="2" id="XNF-79-WHg"/>
                     <constraint firstItem="Zax-d4-L6h" firstAttribute="leading" secondItem="29w-UA-vzn" secondAttribute="leading" id="XTY-1K-fV9"/>
+                    <constraint firstAttribute="bottom" secondItem="okj-AE-hzy" secondAttribute="bottom" constant="10.5" id="dQH-Md-2mR"/>
                     <constraint firstAttribute="bottomMargin" secondItem="29w-UA-vzn" secondAttribute="bottom" constant="4" id="ijg-ad-Ufp"/>
+                    <constraint firstAttribute="bottom" secondItem="okj-AE-hzy" secondAttribute="bottom" constant="10.5" id="mCZ-6H-h4d"/>
                     <constraint firstItem="Zax-d4-L6h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="mcr-Df-7UA"/>
                     <constraint firstItem="29w-UA-vzn" firstAttribute="top" secondItem="87I-BX-Ncx" secondAttribute="bottom" constant="1" id="pEy-3z-xHm"/>
                     <constraint firstAttribute="bottomMargin" secondItem="29w-UA-vzn" secondAttribute="bottom" constant="4" id="pZl-lB-zQ4"/>
                     <constraint firstItem="87I-BX-Ncx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="90" id="pti-vJ-Zew"/>
+                    <constraint firstItem="okj-AE-hzy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="r17-xJ-bTu"/>
                     <constraint firstAttribute="trailingMargin" secondItem="29w-UA-vzn" secondAttribute="trailing" constant="122" id="vhA-Ys-HfZ"/>
                     <constraint firstItem="29w-UA-vzn" firstAttribute="top" secondItem="87I-BX-Ncx" secondAttribute="bottom" constant="1" id="viG-aJ-8SY"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="contactImage" destination="okj-AE-hzy" id="SjU-vU-utI"/>
                 <outlet property="dateLabel" destination="29w-UA-vzn" id="zdt-uF-cvB"/>
                 <outlet property="lastMessageLabel" destination="87I-BX-Ncx" id="uEK-zu-VVa"/>
                 <outlet property="nameLabel" destination="Zax-d4-L6h" id="uA1-Jj-MLL"/>

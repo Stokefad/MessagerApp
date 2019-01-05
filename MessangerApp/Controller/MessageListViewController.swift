@@ -9,11 +9,15 @@
 import UIKit
 import Firebase
 
-class MessageListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MessageListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     var currentContact : ContactPerson?
     var currentUserLogin : String?
     var messagesArray : [Message] = [Message]()
+    var currentImage : UIImage?
+    
+    
+    @IBOutlet weak var bottom: NSLayoutConstraint!
     
     let db = Firestore.firestore()
     
@@ -23,16 +27,36 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
 
         msgTableView.delegate = self
         msgTableView.dataSource = self
+        msgTextfield.delegate = self
         
         msgTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "msgCell")
+        
+        let gestRec = UITapGestureRecognizer(target: self, action: #selector(endEditing))
+        self.msgTableView.addGestureRecognizer(gestRec)
 
         getMessages()
         
+        configureTableView()
+        
         msgTableView.reloadData()
     }
+    
+    
+    private func configureTableView() {
+        msgTableView.rowHeight = UITableView.automaticDimension
+        msgTableView.rowHeight = 100
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
@@ -43,6 +67,9 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
         
     }
     
+    
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messagesArray.count
     }
@@ -52,8 +79,13 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
         
         cell.configureCell(with: messagesArray[indexPath.row])
         
+        msgTableView.scrollToRow(at: IndexPath(row: messagesArray.count - 1, section: 0), at: .bottom, animated: true)
+        
         return cell
     }
+    
+    
+    
     
     @IBAction func sendButtonPressed(_ sender: UIButton) {
         let newMsg = Message()
@@ -61,26 +93,30 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
         newMsg.messageDate = "\(Date.init())"
         newMsg.messageText = msgTextfield.text!
         
-        saveMessage(text: newMsg.messageText!, date: "\(newMsg.messageDate!)")
+        saveMessage(text: newMsg.messageText!, date: "\(newMsg.messageDate!)", sender: (Auth.auth().currentUser?.email!)!)
         
         messagesArray.append(newMsg)
         
         msgTableView.reloadData()
+        
+        msgTextfield.text = ""
     }
     
-    private func saveMessage(text : String, date : String) {
+    private func saveMessage(text : String, date : String, sender : String) {
         let dbref = db.collection("users").document(currentUserLogin!).collection("contacts").document((currentContact?.PersonName!)!).collection("messages")
         
         let dbrefGetter = db.collection("users").document((currentContact?.PersonName!)!).collection("contacts").document(currentUserLogin!).collection("messages")
         
         dbrefGetter.addDocument(data: [
             "text" : text,
-            "date" : date
+            "date" : date,
+            "sender" : sender
         ])
         
         dbref.addDocument(data: [
             "text" : text,
             "date" : date,
+            "sender" : sender
         ])
         
         // in current contacts
@@ -98,6 +134,10 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
         ])
     }
     
+    
+    
+    
+    
     private func getMessages() {
         let dbref = db.collection("users").document(currentUserLogin!).collection("contacts").document((currentContact?.PersonName!)!).collection("messages")
         
@@ -111,6 +151,7 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
                     
                     msg.messageDate = item["date"] as? String
                     msg.messageText = item["text"] as? String
+                    msg.sender = item["sender"] as? String
                     
                     tempArr.append(msg)
                 }
@@ -123,4 +164,34 @@ class MessageListViewController : UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    
+    @IBOutlet weak var textboxView: UIView!
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.5) {
+            self.bottom.constant = self.keyboardH + 15
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.5) {
+            self.bottom.constant = 15
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func endEditing() {
+        msgTextfield.endEditing(true)
+    }
+    
+    var keyboardH : CGFloat = 0
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            self.keyboardH = keyboardRectangle.height
+        }
+    }
 }

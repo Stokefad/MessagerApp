@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import Firebase
 
-class RegistrationViewController : UIViewController {
+class RegistrationViewController : UIViewController, UITextFieldDelegate {
   
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var fullNameTextfield: UITextField!
@@ -31,6 +31,13 @@ class RegistrationViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let gestRec = UITapGestureRecognizer(target: self, action: #selector(endEditing))
+        self.view.addGestureRecognizer(gestRec)
+        
+        emailTextfield.delegate = self
+        passwordTextfield.delegate = self
+        fullNameTextfield.delegate = self
+        
         let settings = db.settings
         settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
@@ -38,6 +45,13 @@ class RegistrationViewController : UIViewController {
         registerButton.layer.cornerRadius = 12
 
     }
+    
+    @objc private func endEditing() {
+        emailTextfield.endEditing(true)
+        passwordTextfield.endEditing(true)
+        fullNameTextfield.endEditing(true)
+    }
+    
     
     @IBAction func registerButtonPressed(_ sender: UIButton) {
         Auth.auth().createUser(withEmail: emailTextfield.text!, password: passwordTextfield.text!) { (authRes, error) in
